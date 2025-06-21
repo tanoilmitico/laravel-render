@@ -1,5 +1,3 @@
-# Dockerfile
-
 # Usa immagine PHP 8.2 con Apache
 FROM php:8.2-apache
 
@@ -10,6 +8,9 @@ RUN apt-get update && apt-get install -y \
 
 # Abilita mod_rewrite di Apache (importante per Laravel)
 RUN a2enmod rewrite
+
+# Copia la configurazione Apache personalizzata
+COPY docker/laravel.conf /etc/apache2/sites-available/000-default.conf
 
 # Copia tutto il progetto nella root di Apache
 COPY . /var/www/html
@@ -28,3 +29,4 @@ EXPOSE 80
 
 # Avvia Apache in foreground
 CMD ["apache2-foreground"]
+
