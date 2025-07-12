@@ -24,6 +24,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Installa le dipendenze PHP con Composer
 RUN composer install --optimize-autoloader --no-dev
 
+# visualizza l immagine sul sito prelevandola dal db
+RUN php artisan storage:link
+
 # Espone la porta 80
 EXPOSE 80
 
